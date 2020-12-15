@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+.Input {
+  display: block;
+  position: relative;
+}
+
+.Input .material-icons {
+  display: none;
+  position: absolute;
+  color: #999;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+
+.Input.icon input {
+  padding-left: 60px;
+}
+.Input.icon .material-icons {
+  display: inline-block;
+}
