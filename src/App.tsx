@@ -44,14 +44,14 @@ function App() {
   return (
     <>
     <div className='App'>
-      <h1>Just Clock it</h1>
+      <h1>GYM</h1>
       <TimesList/>
       <AddTimeEntryForm/>
     </div>
 
 
 
-
+     {/* MUUTA tietueeksi siten, että päivä + datat eikä joka datassa päivä mukana */}
     {/* FORMI ???  kt.https://www.youtube.com/watch?v=rSgbYCdc4G0 */}
       {/* <button onClick={() => setType('kyykky')} >KYYKKY</button>
       <button onClick={() => setType('penkki')} >PENKKI</button>
