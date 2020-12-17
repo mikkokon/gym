@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import firebase from '../firebase';
 
-const useTimes = () => {
+function useTimes(){
   const [times, setTimes] = useState([]);
+
   useEffect(() => {
-    firebase
+    const unsubscribe = firebase
     .firestore()
     .collection('times')
     .onSnapshot((snapshot) => {
       const newTimes:any = snapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data() }
       })
-
+   
       setTimes(newTimes)
     })
+
+    return () => unsubscribe();    
   }, [])
   return times
 }
