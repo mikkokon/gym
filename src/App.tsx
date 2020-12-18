@@ -41,12 +41,19 @@ function App() {
   //       ]);
   // }
 
+  const [activityType, setActivityType] = useState('penkki')
+
   return (
     <>
     <div className='App'>
       <h1>GYM</h1>
-      <TimesList/>
-      <AddTimeEntryForm/>
+      <AddTimeEntryForm
+        activityType={(type: any) => setActivityType(type)}
+      />
+      <TimesList
+        activityType={activityType} 
+      />
+      
     </div>
 
 

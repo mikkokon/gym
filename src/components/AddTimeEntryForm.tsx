@@ -1,21 +1,20 @@
 import firebase from 'firebase';
 import React, { useState } from 'react';
 
-const AddTimeEntryForm = () => {
-  // const [title, setTitle] = useState('');
-  // const [time, setTime] = useState('');
+const AddTimeEntryForm = (props:any) => {
+  console.log('props: ', props)
   const [activityType, setActivityType] = useState('');
   const [weigth, setWeigth] = useState(0);
   const [amount, setAmount] = useState(0);
 
-  function onSubmit(event: any) {
+  const onSubmit = (event: any)=> {
     event.preventDefault();
 
     firebase
     .firestore()
     .collection('practiseDays')
     .add({
-      date: new Date(),
+      date: new Date(2020, 9, 24),
       type: activityType,
       weigth: weigth,
       amount: amount
@@ -28,6 +27,7 @@ const AddTimeEntryForm = () => {
   }
 
   return (
+    <>
     <form onSubmit={onSubmit}>
       <h4>Add Entry</h4>
       <div>
@@ -53,6 +53,15 @@ const AddTimeEntryForm = () => {
       </div>
       <button>Add Time Entry</button>  
     </form>
+
+     <div>
+      <h4>Activity type</h4>
+      <div>
+        <button onClick={()=> props.activityType('penkki')} >PENKKI</button>
+        <button onClick={()=> props.activityType('kyykky')} >KYYKKY</button>
+      </div>   
+     </div>
+   </>
   )
 }
 
