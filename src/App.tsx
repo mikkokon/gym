@@ -3,6 +3,7 @@ import './App.css';
 import firebase from './firebase';
 import TimesList from './components/TimesList';
 import AddTimeEntryForm from './components/AddTimeEntryForm';
+import PreviousActivities from './components/PreviousActivities';
 
 function useTimes(){
   const [times, setTimes] = useState([]);
@@ -46,7 +47,6 @@ function App() {
       amount: amount
     })
     .then(() => {
-      setActivityType('');
       setWeigth(0);
       setAmount(0);
     })
@@ -65,11 +65,15 @@ function App() {
           onAmountEvent={(event:any)=>setAmount(parseInt(event.target.value))} 
           amount={amount}
           onSubmit={onSubmit} />
-
-        <TimesList
-          activityType={activityType}
-          times={times} 
-        />     
+        <div style={{display:'flex'}}>
+          <TimesList
+            activityType={activityType}
+            times={times} /> 
+          <PreviousActivities
+            activityType={activityType}
+            times={times} /> 
+        </div>
+         
       </div>  
     </>
   );

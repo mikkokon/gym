@@ -15,27 +15,28 @@ interface ITimes {
   weigth: number
 }
 
-const TimesList = (props: ITimeListProps) => {
-  //console.log('props: ', props)
+const PreviousActivities = (props: ITimeListProps) => {
+  console.log('props: ', props)
 
   // Näytetään ed. päivän valitut tulokset valitun lajin mukaan
   useEffect(() => {
-    // Suodata valittu aktiviteetti
-    // console.log('times: ', times)
-    // const r = times.filter((item:any) => {
-    //   return item.type === props.activityType
-    // })
-    // console.log('valittu aktiviteetin mukaan: ', r)
+
+    //Suodata valittu aktiviteetti
+    console.log('times: ', props.times)
+    const r = props.times.filter((item:any) => {
+      return item.type === props.activityType
+    })
+    console.log('valittu aktiviteetin mukaan: ', r)
     
     //  // Taulukoi valittu aktiviteetti ja päivä
     // const m = r.map((item:any) => {
     //   return {date: getNanoSeconds(item.date), 
     //           type: item.type,
     //           weigth: item.weigth,
-    //           amount: item.amount };
+    //           amount: item.amount }; 
     // })
     // console.log('m: ', m)
-    // getResultsByDay(m)
+    // getResultsByDay()
 
     // Haetaan edellinen (toisiksi suurimmat) ajat
 
@@ -63,8 +64,8 @@ const TimesList = (props: ITimeListProps) => {
   
   
   // Palauttaa tulokset päivän mukaan; argumentti on lajiteltu jo tyypin mukaan
-  const getResultsByDay = (res: any) => {
-    console.log('res: ', res)
+  const getResultsByDay = (res?: any) => {
+    //console.log('res: ', res)
     const origArr = [
       {date:52434, type:'penkki', weigth: 10, amount: 30},
       {date:32004, type:'penkki', weigth: 200, amount: 10},
@@ -78,7 +79,7 @@ const TimesList = (props: ITimeListProps) => {
       new Date(2030, 0, 1, 2)
     ])
    console.log('results: ', result)
-    // 1. Etsi lähin päivä
+    // 1. Etsi lähin päivä (monta aktiviteettia samalla päivällä ..)
     // 2. Filtteroi (vuosi, kk, päivä -argumenteilla) kaikki lähimmät päivät
     // 3. Siinä se !
 
@@ -113,4 +114,4 @@ const TimesList = (props: ITimeListProps) => {
   )
 }
 
-export default TimesList;
+export default PreviousActivities;
