@@ -15,3 +15,14 @@ export function getDate(time: any) {
 export function getNanoSeconds(time:any) {
   return time.nanoseconds + time.seconds * 1000;
 }
+
+// Palauttaa Date -objektin )
+export function getDateObj(time:any) {
+  return new Date(time)
+}
+
+// Annetaan 'firebase' aika, palauttaa Date -objektin
+export function getDateFromFireBase(time:any) {
+  return new Date(time.nanoseconds + time.seconds * 1000)
+}
+

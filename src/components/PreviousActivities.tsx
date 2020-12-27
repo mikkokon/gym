@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import closestTo from 'date-fns/closestTo'
-import { getDate } from '../helpers/date-utils';
+import { getDate, getDateFromFireBase, getNanoSeconds } from '../helpers/date-utils';
 
 interface ITimeListProps {
   times: ITimes[]
@@ -16,7 +16,6 @@ interface ITimes {
 }
 
 const PreviousActivities = (props: ITimeListProps) => {
-  console.log('props: ', props)
 
   // Näytetään ed. päivän valitut tulokset valitun lajin mukaan
   useEffect(() => {
@@ -28,6 +27,17 @@ const PreviousActivities = (props: ITimeListProps) => {
     })
     console.log('valittu aktiviteetin mukaan: ', r)
     
+    // Muunna firebase aika Date -objektiksi
+    // const res = r.map((item:any) => {
+    //   return {...item,  date: getDateFromFireBase(item.date)}  
+    // })
+    // console.log('res', res)
+
+    // Muuta firebase -ajat Date -objektiksi
+    // Etsi edellinen päivä
+    
+
+
     //  // Taulukoi valittu aktiviteetti ja päivä
     // const m = r.map((item:any) => {
     //   return {date: getNanoSeconds(item.date), 

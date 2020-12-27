@@ -41,14 +41,14 @@ function App() {
     .firestore()
     .collection('practiseDays')
     .add({
-      date: new Date(2020, 9, 24),
+      date: new Date(2020, 9, 24),  //MUUTA TÄKSI PÄIVÄKSI !!
       type: activityType,
       weigth: weigth,
       amount: amount
     })
     .then(() => {
-      setWeigth(0);
-      setAmount(0);
+      // setWeigth(0);
+      // setAmount(0);
     })
   }
 
@@ -66,6 +66,7 @@ function App() {
           amount={amount}
           onSubmit={onSubmit} />
         <div style={{display:'flex'}}>
+          {/* Voisko olla yksi komponentti, jossa parametrina mikä päivä .. */}
           <TimesList
             activityType={activityType}
             times={times} /> 
