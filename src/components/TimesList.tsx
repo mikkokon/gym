@@ -1,50 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import firebase from '../firebase';
+import React, { useEffect } from 'react';
 import closestTo from 'date-fns/closestTo'
 
-function useTimes(){
-  const [times, setTimes] = useState([]);
-
-  useEffect(() => {
-    const unsubscribe = firebase
-    .firestore()
-    .collection('practiseDays')
-    .onSnapshot((snapshot) => {
-      const newTimes:any = snapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() }
-      }) 
-      setTimes(newTimes)
-    })
-    return () => unsubscribe();    
-  }, []) 
-  return times
+interface ITimeListProps {
+  times: ITimes[]
+  activityType: string
 }
 
-const TimesList = (props:any) => {
-  const times = useTimes();  // Miksi times näkyy koko skoopissa ?
+interface ITimes {
+  amount: number
+  date: Date
+  id: string
+  type: string
+  weigth: number
+}
+
+const TimesList = (props: ITimeListProps) => {
   console.log('props: ', props)
-   
-  // ikuinen loop
-  //const [previous, setPrevious] = useState(props.activityType)
 
   // Näytetään ed. päivän valitut tulokset valitun lajin mukaan
   useEffect(() => {
     // Suodata valittu aktiviteetti
-    console.log('times: ', times)
-    const r = times.filter((item:any) => {
-      return item.type === props.activityType
-    })
-    console.log('valittu aktiviteetin mukaan: ', r)
+    // console.log('times: ', times)
+    // const r = times.filter((item:any) => {
+    //   return item.type === props.activityType
+    // })
+    // console.log('valittu aktiviteetin mukaan: ', r)
     
-     // Taulukoi valittu aktiviteetti ja päivä
-    const m = r.map((item:any) => {
-      return {date: getNanoSeconds(item.date), 
-              type: item.type,
-              weigth: item.weigth,
-              amount: item.amount };
-    })
-    console.log('m: ', m)
-    getResultsByDay(m)
+    //  // Taulukoi valittu aktiviteetti ja päivä
+    // const m = r.map((item:any) => {
+    //   return {date: getNanoSeconds(item.date), 
+    //           type: item.type,
+    //           weigth: item.weigth,
+    //           amount: item.amount };
+    // })
+    // console.log('m: ', m)
+    // getResultsByDay(m)
 
     // Haetaan edellinen (toisiksi suurimmat) ajat
 
@@ -128,7 +118,7 @@ const TimesList = (props:any) => {
   return (
     <div>
       <ol>
-        {times.map((time: any) => 
+        {props.times.map((time: any) => 
           <li key={time.id}>
             <div className="time-entry">{getDate(time.date)}</div>
             <div className='time'>{time.type}</div>    

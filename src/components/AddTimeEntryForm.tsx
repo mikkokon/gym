@@ -1,66 +1,41 @@
-import firebase from 'firebase';
-import React, { useState } from 'react';
+import React from 'react';
 
-const AddTimeEntryForm = (props:any) => {
-  console.log('props: ', props)
-  const [activityType, setActivityType] = useState('');
-  const [weigth, setWeigth] = useState(0);
-  const [amount, setAmount] = useState(0);
+interface IAddTimeEntryProps {
+  setActivityType: any
+  onActivityTypeEvent: any
+  activityType: string
+  onWeigthEvent: any
+  weigth: number
+  onAmountEvent: any
+  amount: number
+  onSubmit: any 
+}
 
-  const onSubmit = (event: any)=> {
-    event.preventDefault();
-
-    firebase
-    .firestore()
-    .collection('practiseDays')
-    .add({
-      date: new Date(2020, 9, 24),
-      type: activityType,
-      weigth: weigth,
-      amount: amount
-    })
-    .then(() => {
-      setActivityType('');
-      setWeigth(0);
-      setAmount(0);
-    })
-  }
-
+const AddTimeEntryForm = (props:IAddTimeEntryProps) => {
+ 
   return (
     <>
-    <form onSubmit={onSubmit}>
-      <h4>Add Entry</h4>
+    <form onSubmit={props.onSubmit}>
       <div>
-        <label>Activity type</label>
-        <input 
-          type='text'
-          value={activityType}
-          onChange={(event)=>setActivityType(event.target.value)} />
-      </div>
+        <button onClick={()=> props.setActivityType('penkki')} >PENKKI</button>
+        <button onClick={()=> props.setActivityType('kyykky')} >KYYKKY</button>
+      </div>   
       <div>
         <label>Weigth</label>
         <input 
           type='number'
-          value={weigth}
-          onChange={(event)=>setWeigth(parseInt(event.target.value))} />
+          value={props.weigth}
+          onChange={props.onWeigthEvent} />
       </div>
       <div>
         <label>Amount</label>
         <input 
           type='number'
-          value={amount}
-          onChange={(event)=>setAmount(parseInt(event.target.value))} />
+          value={props.amount}
+          onChange={props.onAmountEvent} />
       </div>
-      <button>Add Time Entry</button>  
+      <button>Add</button>  
     </form>
-
-     <div>
-      <h4>Activity type</h4>
-      <div>
-        <button onClick={()=> props.activityType('penkki')} >PENKKI</button>
-        <button onClick={()=> props.activityType('kyykky')} >KYYKKY</button>
-      </div>   
-     </div>
    </>
   )
 }
