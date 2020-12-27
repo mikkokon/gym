@@ -4,6 +4,8 @@ import firebase from './firebase';
 import TimesList from './components/TimesList';
 import AddTimeEntryForm from './components/AddTimeEntryForm';
 import PreviousActivities from './components/PreviousActivities';
+import { getActivities } from './helpers/get-activities';
+import { getYearMonthDay, getYearMonthDayfromThisDate } from './helpers/date-utils';
 
 function useTimes(){
   const [times, setTimes] = useState([]);
@@ -24,16 +26,18 @@ function useTimes(){
 }
 
 function App() {
-  // yksi tapa jolla haetaan tietty data indexin avulla
-  // const index = completedShifts.findIndex(c => c.id === completed.id);
-  // const oldCompleted = completedShifts[index];
-
-  const times = useTimes(); 
+ 
+  const times = useTimes();
   
   const [activityType, setActivityType] = useState('');
   const [weigth, setWeigth] = useState(0);
   const [amount, setAmount] = useState(0);
  
+  // Get previous activities
+  const tulos = getActivities(times, activityType)
+  console.log('tulos: ', tulos) 
+  console.log('tämä päivä: ', new Date())
+
   const onSubmit = (event: any)=> {
     event.preventDefault();
 
@@ -41,7 +45,9 @@ function App() {
     .firestore()
     .collection('practiseDays')
     .add({
-      date: new Date(2020, 9, 24),  //MUUTA TÄKSI PÄIVÄKSI !!
+      // date: {year: 2020, month: 12, day: 27},
+      // date: getYearMonthDayfromThisDate(),
+      date: '2020,12,27',
       type: activityType,
       weigth: weigth,
       amount: amount
@@ -56,10 +62,9 @@ function App() {
     <>
       <div className='App'>
         <h1>GYM</h1>
+        <button onClick={()=> setActivityType('penkki')} >PENKKI</button>
+        <button onClick={()=> setActivityType('kyykky')} >KYYKKY</button>
         <AddTimeEntryForm
-          setActivityType={(type: any) => setActivityType(type)}
-          onActivityTypeEvent = {(event:any)=>setActivityType(event.target.value)}
-          activityType={activityType}
           onWeigthEvent={(event:any)=>setWeigth(parseInt(event.target.value))}
           weigth={weigth}
           onAmountEvent={(event:any)=>setAmount(parseInt(event.target.value))} 
@@ -70,11 +75,10 @@ function App() {
           <TimesList
             activityType={activityType}
             times={times} /> 
-          <PreviousActivities
+          {/* <PreviousActivities
             activityType={activityType}
-            times={times} /> 
+            times={tulos} />  */}
         </div>
-         
       </div>  
     </>
   );
