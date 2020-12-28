@@ -35,9 +35,7 @@ function App() {
   const [amount, setAmount] = useState(0);
  
   const previousActivities = getActivities(times, activityType)
-  console.log('previousActivities: ', previousActivities)
   const todayActivities = getTodayActivities(times, activityType) 
-  console.log('todayActivities: ', todayActivities)
 
   const onSubmit = (event: any)=> {
     event.preventDefault();
