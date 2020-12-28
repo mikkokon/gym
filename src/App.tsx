@@ -6,6 +6,7 @@ import AddTimeEntryForm from './components/AddTimeEntryForm';
 import PreviousActivities from './components/PreviousActivities';
 import { getActivities } from './helpers/get-activities';
 import { getYearMonthDay, getYearMonthDayfromThisDate } from './helpers/date-utils';
+import { getTodayActivities } from './helpers/get-today-activities';
 
 function useTimes(){
   const [times, setTimes] = useState([]);
@@ -35,8 +36,8 @@ function App() {
  
   const previousActivities = getActivities(times, activityType)
   console.log('previousActivities: ', previousActivities)
-  // const todayActivities = getActivities(times, activityType) 
-  // console.log('todayActivities: ', todayActivities)
+  const todayActivities = getTodayActivities(times, activityType) 
+  console.log('todayActivities: ', todayActivities)
 
   const onSubmit = (event: any)=> {
     event.preventDefault();
@@ -72,7 +73,7 @@ function App() {
           {/* Voisko olla yksi komponentti, jossa parametrina mikä päivä .. */}
           <TimesList
             activityType={activityType}
-            times={times} /> 
+            times={todayActivities} /> 
           <PreviousActivities
             activityType={activityType}
             times={previousActivities} /> 

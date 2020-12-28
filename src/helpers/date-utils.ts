@@ -41,7 +41,7 @@ export function getYearMonthDay(time: any) {
   return {year: year, month: month+1, day: day}
 }
 
-// Muunna tämä päivä (input) muotoon date : {year: xx, month: xx, day: xx}
+// Muunna tämä päivä (input) muotoon '2020, 12,28'
 export function getYearMonthDayfromThisDate() {
   const date = new Date();
   const year = date.getFullYear();
