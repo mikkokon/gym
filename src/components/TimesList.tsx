@@ -16,7 +16,7 @@ interface ITimes {
 }
 
 const TimesList = (props: ITimeListProps) => {
-  
+  console.log('timelist: ', props.times)
   return (
     <div>
       <ol>

@@ -33,10 +33,10 @@ function App() {
   const [weigth, setWeigth] = useState(0);
   const [amount, setAmount] = useState(0);
  
-  // Get previous activities
-  const tulos = getActivities(times, activityType)
-  console.log('tulos: ', tulos) 
-  console.log('tämä päivä: ', new Date())
+  const previousActivities = getActivities(times, activityType)
+  console.log('previousActivities: ', previousActivities)
+  // const todayActivities = getActivities(times, activityType) 
+  // console.log('todayActivities: ', todayActivities)
 
   const onSubmit = (event: any)=> {
     event.preventDefault();
@@ -45,9 +45,7 @@ function App() {
     .firestore()
     .collection('practiseDays')
     .add({
-      // date: {year: 2020, month: 12, day: 27},
-      // date: getYearMonthDayfromThisDate(),
-      date: '2020,12,27',
+      date: getYearMonthDayfromThisDate(), // '2020,12,28'
       type: activityType,
       weigth: weigth,
       amount: amount
@@ -75,9 +73,9 @@ function App() {
           <TimesList
             activityType={activityType}
             times={times} /> 
-          {/* <PreviousActivities
+          <PreviousActivities
             activityType={activityType}
-            times={tulos} />  */}
+            times={previousActivities} /> 
         </div>
       </div>  
     </>

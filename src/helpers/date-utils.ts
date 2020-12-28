@@ -45,14 +45,23 @@ export function getYearMonthDay(time: any) {
 export function getYearMonthDayfromThisDate() {
   const date = new Date();
   const year = date.getFullYear();
-  const month = date.getMonth();
+  const month = date.getMonth() + 1;
   const day = date.getDate();
-  return {year: year, month: month+1, day: day}
+  return `${year},${month},${day}`
 }
 
 // Muunna '2020,12,27'(input) muotoon Date -objekti
 export function getDatefromString(date: any) {
   return new Date(date)
+}
+
+// Muunna Date -objekti muotoon '2020,12,27'
+export function getStringFromDate(dateObj: any) {
+  const date = new Date(dateObj);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${year},${month},${day}`
 }
 
 

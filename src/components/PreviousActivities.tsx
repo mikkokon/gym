@@ -20,9 +20,10 @@ const PreviousActivities = (props: ITimeListProps) => {
   
   return (
     <div>
-      <ol>
+      <h4>EDELLISET</h4>
+      <div>
         {props.times.map((item:any) => 
-          <li key={item.id}>
+          <div key={item.id}>
             <div style={{display:'flex'}}>
               <div>{item.type}: </div>
               <div>{item.weigth}</div> 
@@ -30,10 +31,10 @@ const PreviousActivities = (props: ITimeListProps) => {
               <div>{item.amount}</div> 
             </div>
                   
-          </li>
+          </div>
         )}
       
-    </ol>
+    </div>
     </div>  
   )
 }
