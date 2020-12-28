@@ -1,5 +1,3 @@
-import React, { useEffect } from 'react';
-import closestTo from 'date-fns/closestTo'
 import { getDate } from '../helpers/date-utils';
 
 interface ITimeListProps {

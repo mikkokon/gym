@@ -1,7 +1,3 @@
-import React, { useEffect, useState } from 'react';
-import closestTo from 'date-fns/closestTo'
-import { getDate, getDateFromFireBase, getNanoSeconds, getYearMonthDay } from '../helpers/date-utils';
-import { getActivities } from '../helpers/get-activities';
 
 interface ITimeListProps {
   times: ITimes[]

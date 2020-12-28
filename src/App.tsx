@@ -5,7 +5,7 @@ import TimesList from './components/TimesList';
 import AddTimeEntryForm from './components/AddTimeEntryForm';
 import PreviousActivities from './components/PreviousActivities';
 import { getActivities } from './helpers/get-activities';
-import { getYearMonthDay, getYearMonthDayfromThisDate } from './helpers/date-utils';
+import { getYearMonthDayfromThisDate } from './helpers/date-utils';
 import { getTodayActivities } from './helpers/get-today-activities';
 
 function useTimes(){
