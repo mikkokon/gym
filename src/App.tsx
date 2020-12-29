@@ -7,10 +7,11 @@ import PreviousActivities from './components/PreviousActivities';
 import { getActivities } from './helpers/get-activities';
 import { getYearMonthDayfromThisDate } from './helpers/date-utils';
 import { getTodayActivities } from './helpers/get-today-activities';
+import NumberPad from './components/NumberPad/NumberPad';
 
 function useTimes(){
   const [times, setTimes] = useState([]);
-
+ 
   useEffect(() => {
     const unsubscribe = firebase
     .firestore()
@@ -61,6 +62,7 @@ function App() {
         <h1>GYM</h1>
         <button onClick={()=> setActivityType('penkki')} >PENKKI</button>
         <button onClick={()=> setActivityType('kyykky')} >KYYKKY</button>
+        <NumberPad/>
         <AddTimeEntryForm
           onWeigthEvent={(event:any)=>setWeigth(parseInt(event.target.value))}
           weigth={weigth}
