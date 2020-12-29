@@ -1,3 +1,23 @@
-.gridWrapper {
-  color:red;
-}
+
+  .container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10px;
+    /* Background opacity does not affect to children: */
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+  }
+  
+  .container > div {
+    background-color: orange;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+    border-radius: 25%; 
+    }
+
+  .container .ok {
+    background-color: red;
+  }
+  
+  
