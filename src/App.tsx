@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import firebase from './firebase';
-import TimesList from './components/TimesList';
 import AddTimeEntryForm from './components/AddTimeEntryForm';
-import PreviousActivities from './components/PreviousActivities';
+import PreviousActivities from './components/PreviousActivities/PreviousActivities';
 import { getActivities } from './helpers/get-activities';
 import { getYearMonthDayfromThisDate } from './helpers/date-utils';
 import { getTodayActivities } from './helpers/get-today-activities';
 import NumberPad from './components/NumberPad/NumberPad';
+import TodayActivities from './components/TodayActivities/TodayActivities';
 
 function useTimes(){
   const [times, setTimes] = useState([]);
@@ -34,9 +34,11 @@ function App() {
   const [activityType, setActivityType] = useState('');
   const [weigth, setWeigth] = useState(0);
   const [amount, setAmount] = useState(0);
- 
+  const [isActivitiesOpen, setActivitiesOpen] = useState(true); 
+
   const previousActivities = getActivities(times, activityType)
-  const todayActivities = getTodayActivities(times, activityType) 
+  const todayActivities = getTodayActivities(times, activityType)
+   
 
   const onSubmit = (event: any)=> {
     event.preventDefault();
@@ -59,25 +61,31 @@ function App() {
   return (
     <>
       <div className='App'>
-        <h1>GYM</h1>
-        <button onClick={()=> setActivityType('penkki')} >PENKKI</button>
-        <button onClick={()=> setActivityType('kyykky')} >KYYKKY</button>
-        <NumberPad/>
+        {/* <NumberPad/> */}
+        <p>sorttaa painon mukaan</p>
+        { isActivitiesOpen &&
+          <div className='activities'>   
+            <PreviousActivities
+              activityType={activityType}
+              times={previousActivities} />
+            <TodayActivities
+              activityType={activityType}
+              times={todayActivities} />  
+          </div>
+        }
+
         <AddTimeEntryForm
           onWeigthEvent={(event:any)=>setWeigth(parseInt(event.target.value))}
           weigth={weigth}
           onAmountEvent={(event:any)=>setAmount(parseInt(event.target.value))} 
           amount={amount}
           onSubmit={onSubmit} />
-        <div style={{display:'flex'}}>
-          {/* Voisko olla yksi komponentti, jossa parametrina mikä päivä .. */}
-          <TimesList
-            activityType={activityType}
-            times={todayActivities} /> 
-          <PreviousActivities
-            activityType={activityType}
-            times={previousActivities} /> 
-        </div>
+
+        <div onClick={() => setActivitiesOpen(!isActivitiesOpen)}>SPORT</div>
+        <div>KG</div>
+        <div>REPS</div>
+        <button onClick={()=> setActivityType('penkki')} >PENKKI</button>
+        <button onClick={()=> setActivityType('kyykky')} >KYYKKY</button>
       </div>  
     </>
   );

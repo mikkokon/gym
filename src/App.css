@@ -11,8 +11,9 @@ body {
   box-shadow: 0 2px 4px #ddd;
 }
 
-h1 {
-  margin: 0;
+.activities {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .time-entry {

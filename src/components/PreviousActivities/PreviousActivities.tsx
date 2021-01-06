@@ -1,4 +1,6 @@
 
+import './PreviousActivities.css';
+
 interface ITimeListProps {
   times: ITimes[]
   activityType: string
@@ -17,7 +19,17 @@ const PreviousActivities = (props: ITimeListProps) => {
   return (
     <div>
       <h4>EDELLISET</h4>
-      <div>
+      
+      <div>{props.times[0]?.type}</div>
+      {props.times.map((item:any) => 
+         <div key={item.id}
+              className="flex-container">
+          <div className="item1">{item.weigth}</div>
+          <div className="item2">{item.amount}</div>
+         </div>  
+      )}
+
+      {/* <div>
         {props.times.map((item:any) => 
           <div key={item.id}>
             <div style={{display:'flex'}}>
@@ -28,9 +40,8 @@ const PreviousActivities = (props: ITimeListProps) => {
             </div>
                   
           </div>
-        )}
-      
-    </div>
+        )}   
+    </div> */}
     </div>  
   )
 }
