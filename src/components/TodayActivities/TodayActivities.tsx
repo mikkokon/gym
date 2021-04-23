@@ -15,7 +15,7 @@ interface ITimes {
 }
 
 const TodayActivities = (props: ITimeListProps) => {
-  console.log('timelist today: ', props.times)
+  // console.log('timelist today: ', props.times)
   return (
     <div>
       <h4>TODAY</h4>
